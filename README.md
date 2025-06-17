@@ -199,4 +199,55 @@ docker compose up -d
 # depois disso rode com localhost:
 ```
 http://localhost
+```
+
+## Teste de carga:
+
+```
+Jonas@Tsi:~/Documentos/GCSI/ProcureAki$ ab -n 100 -c 10 http://localhost/
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.27.5
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /
+Document Length:        732 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.046 seconds
+Complete requests:      100
+Failed requests:        20
+   (Connect: 0, Receive: 0, Length: 20, Exceptions: 0)
+Total transferred:      96400 bytes
+HTML transferred:       73100 bytes
+Requests per second:    2171.22 [#/sec] (mean)
+Time per request:       4.606 [ms] (mean)
+Time per request:       0.461 [ms] (mean, across all concurrent requests)
+Transfer rate:          2044.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0       2
+Processing:     1    4   2.4      3      15
+Waiting:        1    4   2.4      3      15
+Total:          1    4   2.5      4      16
+
+Percentage of the requests served within a certain time (ms)
+  50%      4
+  66%      4
+  75%      5
+  80%      6
+  90%      8
+  95%      8
+  98%     14
+  99%     16
+ 100%     16 (longest request)
+Jonas@Tsi:~/Documentos/GCSI/ProcureAki$ 
+
 ``` 
