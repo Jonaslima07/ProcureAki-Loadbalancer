@@ -13,29 +13,30 @@ sudo apt install nginx
 ```
 git clone https://github.com/fulanodetal/ProjetoInovador.git
 cd ProjetoInovador
-
+```
 ## Etapa 3:
 - Instale as dependências:
+
 ```
 npm install
 ```
 
-# Etapa 4: 
+## Etapa 4: 
 - Execute o comando a seguir para deixar sua aplicação pronta para produção:
 ```
 npm run build
 ```
 - Depois que executar, seu projeto irá aparecer a pasta dist.
 
-# Etapa 5:
-- crie o arquivo [Dockerfile](/Dockerfile) de configuração: 
+## Etapa 5:
+- crie o arquivo Dockerfile de configuração: 
 ```
 FROM nginx:alpine
 COPY dist/ /usr/share/nginx/html
 ```
 
-# Etapa 6:
-- criar o arquivo [nginx.conf](/nginx.conf):
+## Etapa 6:
+- criar o arquivo nginx.conf:
 ```
 user  nginx;
 worker_processes  auto;
@@ -72,8 +73,8 @@ http {
 }
 
 ```
-# Etapa 7:
-- criar o arquivo e aqui configuramos para o loadbalancer[default.conf](/default.conf):
+## Etapa 7:
+- criar o arquivo e aqui configuramos para o loadbalancer default.conf:
 
 ```
 upstream nodes_loadbalancer {
@@ -99,8 +100,8 @@ server {
 }
 ```
 
-# Etapa 8:
-- criar o arquivo [docker-compose.yml](/docker-compose.yml):
+## Etapa 8:
+- criar o arquivo docker-compose.yml:
 ```
 version: "3.8"
 
@@ -166,7 +167,7 @@ networks:
     driver: bridge
 
 ```
-# Etapa 9:
+## Etapa 9:
 - criamos as pastas dos nos cada um com seus arquivos estaticos:
 ```
 mkdir build-node2 build-node3 build-node4 build-node5
@@ -178,7 +179,7 @@ echo "<h1>Node5</h1>" > build-node5/index.html
 
 
 ```
-# Etapa 10:
+## Etapa 10:
 - criamos o arquivo dockerfile.node onde tera as configurações dos nodes2 a node5 com as mensagens diferentes:
 
 ```
@@ -186,10 +187,12 @@ nano dockerfile.node
 
 ```
 
-# Etapa 11:
+## Etapa 11:
 - executamos esses comandos para você garantir que o conteúdo está correto nas pastas, rode: 
 ```
-nano dockerfile.node
+docker compose down
+docker compose build --no-cache
+docker compose up -d
 
 ``` 
 
