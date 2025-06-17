@@ -196,4 +196,7 @@ docker compose up -d
 
 ``` 
 
-# depois disso rode com localhost
+# depois disso rode com localhost:
+```
+http://localhost
+``
