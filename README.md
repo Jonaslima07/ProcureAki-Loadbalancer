@@ -200,12 +200,15 @@ docker compose up -d
 ```
 http://localhost
 ```
+<<<<<<< HEAD
 - irá aparecer a tela da aplicação:
 
 ![appBrowser](img/tela-home.xcf)
 
 - cada vez que atualizar a aplicação, apartir do no2 ao 5, irá exibir uma mensagem de cada no, como: node2,node3,node4,node5.
 
+=======
+>>>>>>> af239ad1dd78783fcabb62b3b72f0902637c9acc
 
 ## Teste de carga:
 
