@@ -13,29 +13,30 @@ sudo apt install nginx
 ```
 git clone https://github.com/fulanodetal/ProjetoInovador.git
 cd ProjetoInovador
-
+```
 ## Etapa 3:
 - Instale as dependências:
+
 ```
 npm install
 ```
 
-# Etapa 4: 
+## Etapa 4: 
 - Execute o comando a seguir para deixar sua aplicação pronta para produção:
 ```
 npm run build
 ```
 - Depois que executar, seu projeto irá aparecer a pasta dist.
 
-# Etapa 5:
-- crie o arquivo [Dockerfile](/Dockerfile) de configuração: 
+## Etapa 5:
+- crie o arquivo Dockerfile de configuração: 
 ```
 FROM nginx:alpine
 COPY dist/ /usr/share/nginx/html
 ```
 
-# Etapa 6:
-- criar o arquivo [nginx.conf](/nginx.conf):
+## Etapa 6:
+- criar o arquivo nginx.conf:
 ```
 user  nginx;
 worker_processes  auto;
@@ -72,8 +73,8 @@ http {
 }
 
 ```
-# Etapa 7:
-- criar o arquivo e aqui configuramos para o loadbalancer[default.conf](/default.conf):
+## Etapa 7:
+- criar o arquivo e aqui configuramos para o loadbalancer default.conf:
 
 ```
 upstream nodes_loadbalancer {
@@ -99,8 +100,8 @@ server {
 }
 ```
 
-# Etapa 8:
-- criar o arquivo [docker-compose.yml](/docker-compose.yml):
+## Etapa 8:
+- criar o arquivo docker-compose.yml:
 ```
 version: "3.8"
 
@@ -166,7 +167,7 @@ networks:
     driver: bridge
 
 ```
-# Etapa 9:
+## Etapa 9:
 - criamos as pastas dos nos cada um com seus arquivos estaticos:
 ```
 mkdir build-node2 build-node3 build-node4 build-node5
@@ -178,7 +179,7 @@ echo "<h1>Node5</h1>" > build-node5/index.html
 
 
 ```
-# Etapa 10:
+## Etapa 10:
 - criamos o arquivo dockerfile.node onde tera as configurações dos nodes2 a node5 com as mensagens diferentes:
 
 ```
@@ -186,11 +187,73 @@ nano dockerfile.node
 
 ```
 
-# Etapa 11:
+## Etapa 11:
 - executamos esses comandos para você garantir que o conteúdo está correto nas pastas, rode: 
 ```
-nano dockerfile.node
+docker compose down
+docker compose build --no-cache
+docker compose up -d
 
 ``` 
 
-# depois disso rode com localhost
+# depois disso rode com localhost:
+```
+http://localhost
+```
+- irá aparecer a tela da aplicação:
+
+![appBrowser](img/tela-home.xcf)
+
+- cada vez que atualizar a aplicação, apartir do no2 ao 5, irá exibir uma mensagem de cada no, como: node2,node3,node4,node5.
+
+
+## Teste de carga:
+
+```
+Jonas@Tsi:~/Documentos/GCSI/ProcureAki$ ab -n 100 -c 10 http://localhost/
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.27.5
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /
+Document Length:        732 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.046 seconds
+Complete requests:      100
+Failed requests:        20
+   (Connect: 0, Receive: 0, Length: 20, Exceptions: 0)
+Total transferred:      96400 bytes
+HTML transferred:       73100 bytes
+Requests per second:    2171.22 [#/sec] (mean)
+Time per request:       4.606 [ms] (mean)
+Time per request:       0.461 [ms] (mean, across all concurrent requests)
+Transfer rate:          2044.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0       2
+Processing:     1    4   2.4      3      15
+Waiting:        1    4   2.4      3      15
+Total:          1    4   2.5      4      16
+
+Percentage of the requests served within a certain time (ms)
+  50%      4
+  66%      4
+  75%      5
+  80%      6
+  90%      8
+  95%      8
+  98%     14
+  99%     16
+ 100%     16 (longest request)
+Jonas@Tsi:~/Documentos/GCSI/ProcureAki$ 
+
+``` 
