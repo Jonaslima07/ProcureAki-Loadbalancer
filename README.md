@@ -202,7 +202,7 @@ http://localhost
 ``` 
 - Irá aparecer a tela da aplicação no navegador:
 
-![Tela da aplicação](img/tela-home.png)
+![Tela da aplicação](img/tela-home(1).png)
 
 
 - cada vez que atualizar a aplicação, apartir do no2 ao 5, irá exibir uma mensagem de cada no, como: node2,node3,node4,node5.
